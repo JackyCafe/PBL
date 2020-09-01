@@ -1,0 +1,41 @@
+{% block create_group %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% for group_member1 in group_member %}
+                    {{ group_member1.id }}
+                {% endfor %}
+                </div>
+                <div class="col-md-6">
+                    <form method="POST" class="post-form">
+                        {% csrf_token %}
+                         <label for="group_name"> 群組名稱:</label>
+                        {{ groupform.group }}
+                        <div class="form-group">
+                            <label for="user_id"> 選擇學員:</label>
+                        <p></p>
+                        {% for user_a1 in user_a %}
+                            {% for user_b1 in user_b %}
+                                {% if user_a1.id == user_b1 %}
+                                    <input type="checkbox" value="{{ user_a1.id }}" name="check_box_list" checked>{{ user_a1.name }}{{ user_a1.c_name }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% for user_a1 in user_a %}
+                            {% for user_e1 in user_e %}
+                                {% if user_a1.id == user_e1 %}
+                                    <input type="checkbox" value="{{ user_a1.id }}" name="check_box_list">{{ user_a1.name }}{{ user_a1.c_name }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        </div>
+                    <div class="form-group">
+                            <label for="user_id"> 班級:</label>
+                        {{ groupform.activate }}
+                        </div>
+                    <button type="submit" class="btn btn-success">修改</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+{% endblock %}

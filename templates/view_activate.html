@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block  content %}
+     <div class="container">
+			<div class="row">
+				<div class="col-md-12">
+    <table class="table table-bordered" style="margin-top:50px;">
+    {% if request.session.user_identify == 'teacher' %}
+    <tr>
+        <td><a href={% url 'create_activate' %}>創建班級</a></td>
+    </tr>
+    {% endif %}
+    <tr>
+        {% for activate_a1 in activate_a %}
+            {% if group_a %}
+                {% for group_a1 in group_a %}
+                    {% if group_a1.activate == activate_a1 or request.session.user_identify == 'teacher'%}
+                        <td><a href={% url 'view_group' pk=activate_a1.id %}><h4>{{ activate_a1.activate_name}}</h4></a></td>
+                    {% endif %}
+                {% endfor %}
+            {% else%}
+                <td><a href={% url 'create_group'  pk=class_id%}><h4>{{ activate_a1.activate_name}}</h4></a></td>
+            {% endif %}
+     {% endfor %}
+    </tr>
+    </table>
+                </div>
+            </div>
+    </div>
+{% endblock %}
