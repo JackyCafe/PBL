@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% block title %}
 {% endblock %}
 {% block  content %}
 
+    <img class="img-fluid" alt="Responsive image" src="{% static 'images/index.jpg' %}" style="width:100%;height: auto">
 
-<img class="img-fluid" alt="Responsive image" src="{% static 'images/index.jpg' %}" style="height: auto">
     <div class="container">
         <div class="row>">
+
 
 
     {% if request.session.user_identify == 'teacher' %}

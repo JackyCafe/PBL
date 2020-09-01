@@ -81,15 +81,21 @@ def index(request):
 
 def cardind(request, pk):
     group = Group.objects.get(id=pk)
-    group_user = group.group_user.filter(id=request.session['user_id'])
-    up_cards = UPCard.objects.all()
-    context = {
+    is_login = request.session.get('user_id',None)
+
+
+    if  is_login == None:
+        return redirect(reverse('index'))
+    else:
+        group_user = group.group_user.filter(id=request.session['user_id'])
+        up_cards = UPCard.objects.all()
+        context = {
         'group': group,
         'group_user': group_user,
         'up_cards': up_cards,
         'pk': pk
-    }
-    return render(request, 'card_base.html', context)
+        }
+        return render(request, 'card_base.html', context)
 
 #
 # def cardind(request, pk):
@@ -174,7 +180,7 @@ def uploadcard(request):
                 img = pic.horizontal()
                 cv2.imencode('.JPG', img)[1].tofile(cards.thumbnail)
                 #cv2.imwrite( )
-            return redirect(reverse('check_card'))
+            return redirect(reverse('index'))
     else:
         form = CardForm()
         user_id = request.session['user_id']
