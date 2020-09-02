@@ -1,7 +1,7 @@
 from login.models import User
 import csv
 
-datas = csv.reader(open('1.csv'), delimiter=',', quotechar='"')
+datas = csv.reader(open('../1B.csv'), delimiter=',', quotechar='"')
 for data in datas:
     user = User(name=data[1], password=data[2], email=data[3], c_name=data[0])
     user.save()
