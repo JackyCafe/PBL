@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'pbltest',
     'login',
     'django.contrib.staticfiles',
-    'taggit',
-]
+ ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

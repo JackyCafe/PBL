@@ -1,3 +1,5 @@
+from django.core import paginator
+from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.shortcuts import render
 from . import form
 # Create your views here.
@@ -6,6 +8,7 @@ from django.shortcuts import redirect
 
 # Create your views here.
 from .models import Group
+
 
 
 def index(request):
@@ -169,9 +172,20 @@ def view_group(request, pk):
     return render(request, 'view_group.html', context)
 
 
+
+
 def create_group(request, pk):
     activate_a = models.CreateActivate.objects.filter(id=pk)
     user_a = models.User.objects.all()
+    paginator = Paginator(user_a,60)
+    paginate_by = 60
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
     if request.method == 'POST':
         group = form.CreateGroup(request.POST)
         tests = request.POST.getlist('check_box_list')
