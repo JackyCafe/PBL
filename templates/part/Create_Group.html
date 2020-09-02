@@ -12,10 +12,15 @@
                             <label for="user_id"> 選擇學員:</label>
 
                                 {% for user_a1 in user_a %}
-                                          {% cycle "<div  class='row'> <div class='col-md-4'>" "<div class='col-md-4'>" "<div class='col-md-4'>"  %}
-                                        <input type="checkbox" value="{{ user_a1.id }}" name="check_box_list">{{ user_a1.name }}{{ user_a1.c_name }}
-                                    </div>
-                                        {% cycle   " " " " "</div>" %}
+                                        <div class="card">
+                                        <div class="card body">
+                                            <div class="card-title">
+                                        <input type="checkbox" value="{{ user_a1.id }}" name="check_box_list">{{ user_a1.name }}</div>
+                                            <div class="card-text">
+                                                {{ user_a1.c_name }}</div>
+                                            </div></div>
+
+
 
                             {% endfor %}
                                   </table>
