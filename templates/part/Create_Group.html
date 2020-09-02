@@ -10,13 +10,12 @@
                         {{ group.group }}
                         <div class="form-group">
                             <label for="user_id"> 選擇學員:</label>
-                                <table>
+
                                 {% for user_a1 in user_a %}
-
+                                          {% cycle "<div  class='row'> <div class='col-md-4'>" "<div class='col-md-4'>" "<div class='col-md-4'>"  %}
                                         <input type="checkbox" value="{{ user_a1.id }}" name="check_box_list">{{ user_a1.name }}{{ user_a1.c_name }}
-
-
-
+                                    </div>
+                                        {% cycle   " " " " "</div>" %}
 
                             {% endfor %}
                                   </table>

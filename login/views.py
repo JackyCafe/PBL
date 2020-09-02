@@ -11,7 +11,7 @@ from .models import Group
 def index(request):
     class_id = 0
     if 'class_id' not in request.session:
-        print('1223')
+        pass
     else:
         class_id = request.session['class_id']
     test_class = models.CreateClass.objects.all()
