@@ -72,7 +72,7 @@ def index(request):
 
 def cardind(request, pk):
     group = Group.objects.get(id=pk)
-    group_user = group.group_user.all()
+    group_user = group.group_user.filter(id=request.session['user_id'])
     up_cards = UPCard.objects.all()
     context = {
         'group': group,
@@ -81,6 +81,19 @@ def cardind(request, pk):
         'pk': pk
     }
     return render(request, 'card_base.html', context)
+
+#
+# def cardind(request, pk):
+#     group = Group.objects.get(id=pk)
+#     group_user = group.group_user.all()
+#     up_cards = UPCard.objects.all()
+#     context = {
+#         'group': group,
+#         'group_user': group_user,
+#         'up_cards': up_cards,
+#         'pk': pk
+#     }
+#     return render(request, 'card_base.html', context)
 
 #Todo cardmanage 轉群組需額外處理
 
