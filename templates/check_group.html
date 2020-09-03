@@ -3,29 +3,29 @@
     <title>劇本雲-查看群組</title>
 {% endblock %}
 {% block content %}
-<table class="table mb-0">
-        <thead>
-            <tr>
-                <th>教室</th>
-                <th>班級</th>
-                <th>群組</th>
-                <th>新增組員</th>
-                <th>刪除</th>
+<table class="table table-hover table-striped table-bordered table-rwd">
+        <thead >
+            <tr class="tr-only-hide">
+                <th scope="col" >教室</th>
+                <th scope="col">班級</th>
+                <th scope="col">群組</th>
+                <th scope="col">編輯</th>
+                <th scope="col">刪除</th>
             </tr>
         </thead>
         <tbody>
             {% for groupa in group %}<tr>
-              <td> {{ groupa.activate.class_id }}</td>
-           <td> {{ groupa.activate }}</td>
-                <td>{{ groupa.group }}</td>
-                <td>
+              <td data-th="教室"> {{ groupa.activate.class_id }}</td>
+           <td data-th ="班級"> {{ groupa.activate }}</td>
+                <td data-th="群組">{{ groupa.group }}</td>
+                <td data-th="編輯">
                         <form method="post" action="{% url 'edit_group' groupa.pk %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">修改</button>
                     </form>
                 </td>
 
-                <td>
+                <td data-th="刪除">
                         <form method="post" action="{% url 'delete_group' groupa.pk %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">刪除</button>
