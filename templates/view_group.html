@@ -27,12 +27,13 @@
      </div>
          {% for group_a1 in group_a %}
         {% cycle "<div  class='row'> <div class='col-md-4'>" "<div class='col-md-4'>" "<div class='col-md-4'>"  %}
-            <div class="card" > <div class="card-body">
-                <div class="card-text">
+ <div class="card" style="width: auto;">
+                                    <div class="card-body">
+                           <div class="card-text">
 
              <a href={% url 'card' pk=group_a1.id %}><h4>{{ group_a1.group}}</h4></a>
-                    </div>
-            </div></div>
+</div></div>
+                        </div>
                 </div>
             {% cycle   " " " " "</div>" %}
    {% endfor %}   </div>

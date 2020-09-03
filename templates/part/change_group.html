@@ -11,29 +11,42 @@
                         {% csrf_token %}
                          <label for="group_name"> 群組名稱:</label>
                         {{ groupform.group }}
+                    <div class="form-group">
+                            <label for="user_id"> 班級:</label>
+                        {{ groupform.activate }}
+                        </div>
+                    <button type="submit" class="btn btn-success">修改</button>
                         <div class="form-group">
                             <label for="user_id"> 選擇學員:</label>
                         <p></p>
                         {% for user_a1 in user_a %}
                             {% for user_b1 in user_b %}
                                 {% if user_a1.id == user_b1 %}
+                                    {% cycle "<div class='row'> <div class='col-md-4'>" "<div class='col-md-4'>" "<div class='col-md-4'>" %}
+ <div class="card" > <div class="card-body">
+                <div class="card-text">
                                     <input type="checkbox" value="{{ user_a1.id }}" name="check_box_list" checked>{{ user_a1.name }}{{ user_a1.c_name }}
+                </div></div></div>
+                                    </div>
+                                     {% cycle   "" ""  "</div>" %}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
                         {% for user_a1 in user_a %}
                             {% for user_e1 in user_e %}
                                 {% if user_a1.id == user_e1 %}
+                                     {% cycle "<div class='row'> <div class='col-md-4'>" "<div class='col-md-4'>" "<div class='col-md-4'>" %}
+            <div class="card" > <div class="card-body">
+                <div class="card-text">
                                     <input type="checkbox" value="{{ user_a1.id }}" name="check_box_list">{{ user_a1.name }}{{ user_a1.c_name }}
+                                     </div></div></div>
+                                    </div>
+                                     {% cycle   "" ""  "</div>" %}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
-                        </div>
-                    <div class="form-group">
-                            <label for="user_id"> 班級:</label>
-                        {{ groupform.activate }}
-                        </div>
-                    <button type="submit" class="btn btn-success">修改</button>
+
+
                     </form>
                 </div>
         </div>
