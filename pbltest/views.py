@@ -17,7 +17,7 @@ from .models import UPCard, Card, TestCard, RowCard
 def post_card(request, pk):
     post = UPCard.objects.all()
     card = UPCard.objects.get(id=pk)
-    author = User.objects.all()
+    author = Group.objects.filter(group_user=request.session['user_id'])
     group = Group.objects.all();
     if request.method == "POST":
         card_form = CreateCardForm(request.POST)
