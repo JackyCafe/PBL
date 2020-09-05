@@ -22,12 +22,16 @@ class Picture_part:
     def vertical(self):
         orginal_img = cv2.imdecode(np.fromfile(self.filename, np.uint8), cv2.IMREAD_COLOR)
         h, w, c = orginal_img.shape
-        # 橫式處理
+        # 直式處理
         if w < h:
-            new_w_start = int(w / 21 * 4)
-            new_w_end = int(w / 21 * 20)
-            new_h_start = int(h / 30 * 5)
-            new_h_end = int(h / 30 * 16)
+            new_w_start = int(w / 21 * 1.4)
+            new_w_end = int(w / 21 * 19.7)
+            new_h_start = int(h / 29.7 * 4.7)
+            new_h_end = int(h / 29.7 * 16.4)
+            # new_w_start = int(w / 21 * 4)
+            # new_w_end = int(w / 21 * 20)
+            # new_h_start = int(h / 30 * 5)
+            # new_h_end = int(h / 30 * 16)
             img = orginal_img[new_h_start:new_h_end, new_w_start:new_w_end]
             return img
         else:
