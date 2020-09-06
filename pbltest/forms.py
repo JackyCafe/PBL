@@ -5,6 +5,8 @@ from django.utils import timezone
 
 
 class CardForm(forms.ModelForm):
+
+
     title = forms.CharField(widget=forms.TextInput(
         attrs={
             'class': 'form-controll form-control',
@@ -12,15 +14,10 @@ class CardForm(forms.ModelForm):
             'name': 'card_name',
         }
     ))
-    author = forms.ModelChoiceField(
-        queryset=User.objects.filter(),
-        widget=forms.Select(
-            attrs={
-                'class': 'form-control',
-                'id': 'card-author',
 
-            }
-        )
+    author = forms.CharField(
+
+         widget=forms.HiddenInput(        )
     )
     cover = forms.FileField(
         widget=forms.FileInput(
@@ -38,29 +35,21 @@ class CardForm(forms.ModelForm):
             'id': 'class_material',
         }
     ))
-    activate = forms.ModelChoiceField(
-        queryset=CreateActivate.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'class': 'form-controll form-control',
-                'id': 'activate',
+    activate = forms.CharField(
 
-            }
-        )
-    )
-    group = forms.ModelChoiceField(
-        queryset=Group.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'class': 'form-control',
-                'id': 'group',
+        widget=forms.HiddenInput()
 
-            }
-        )
     )
+    #
+    group = forms.CharField(
+        widget = forms.HiddenInput()
+
+    )
+
 
     class Meta:
         model = UPCard
+      #  fields = ('title', 'cover', 'class_material')
         fields = ('title','author','cover','class_material','activate','group')
 
 
@@ -94,40 +83,40 @@ class CreateCardForm(forms.ModelForm):
             }
         )
     )
-    author = forms.ModelChoiceField(
+    author = forms.CharField(
 
-        queryset=User.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'class': 'form-control',
-                'id': 'card-author',
-            }
-        )
+        # queryset=User.objects.all(),
+        # widget=forms.Select(
+        #     attrs={
+        #         'class': 'form-control',
+        #         'id': 'card-author',
+        #     }
+        # )
     )
-    activate = forms.ModelChoiceField(
-        queryset=CreateActivate.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'class': 'form-controll form-control',
-                'id': 'activate',
-
-            }
-        )
+    activate = forms.CharField(
+        # queryset=CreateActivate.objects.all(),
+        # widget=forms.Select(
+        #     attrs={
+        #         'class': 'form-controll form-control',
+        #         'id': 'activate',
+        #
+        #     }
+        # )
     )
-    group = forms.ModelChoiceField(
-        queryset=Group.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'class': 'form-control',
-                'id': 'group',
-
-            }
-        )
+    group = forms.CharField(
+        # queryset=Group.objects.all(),
+        # widget=forms.Select(
+        #     attrs={
+        #         'class': 'form-control',
+        #         'id': 'group',
+        #
+        #     }
+        # )
     )
 
     class Meta:
         model = Card
-        fields = ('title', 'context', 'author', 'context1', 'cover', 'activate', 'group')
+        fields = ('title', 'context', 'author', 'context1', 'cover', 'group', 'activate')
 
 
 class RowCreateCardForm(forms.ModelForm):
