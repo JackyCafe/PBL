@@ -17,14 +17,15 @@ from .models import UPCard, Card, TestCard, RowCard
 def post_card(request, pk):
     post = UPCard.objects.all()
     card = UPCard.objects.get(id=pk)
-    user = Group.objects.get(group_user=request.session['user_id'])
+    groups = Group.objects.get(group_user=request.session['user_id'])
+    user = User.objects.filter(id=request.session['user_id']).values_list()[0]
     author = request.session['user_id']
-    group = user.group
-    activate = user.activate
-    Card.group = group
+    group = groups.group
+    activate = groups.activate
+    Card.group = groups
     Card.activate = activate
-    Card.author = user
-     # groups = Group.objects.all();
+    Card.author = author
+      # groups = Group.objects.all();
     if request.method == "POST":
         card_form = CreateCardForm(request.POST)
         if card_form.is_valid():
@@ -34,11 +35,12 @@ def post_card(request, pk):
     else:
         card_form = CreateCardForm()
     context = {
-        'form': CreateCardForm(initial={'author': author
-              ,'group':group
+        'form': CreateCardForm(initial={'author': user[1]
+              ,'group':groups
             , 'activate': activate}),
         'pk': pk,
         'card': card,
+        'user':user[1]
          # 'groups': groups,
     }
     return render(request, "create_card.html", context)
@@ -151,7 +153,6 @@ def uploadcard(request):
         form = CardForm(request.POST, request.FILES)
         if form.is_valid():
             cards = form.save(commit=False) #UPCard 的實體
-            print(form)
             file = cards.cover.file.name
             filename = os.path.basename(file)
             #pic = Picture_part(filename)
@@ -176,13 +177,13 @@ def uploadcard(request):
         form = CardForm()
         user_id = request.session['user_id']
         user = User.objects.get(id=user_id)
-        UPCard.author = user_id
+        UPCard.author = user.c_name
         groups_name =  user.user_user.all().values_list('id','group','activate_id')[0]
         UPCard.group = list(groups_name)[1]
         activate_name = CreateActivate.objects.get(id=list(groups_name)[2])
         UPCard.activate = activate_name
 
-        context = {'form':CardForm(initial={'author': user
+        context = {'form':CardForm(initial={'author': request.session['user_id']
               ,'group':list(groups_name)[0]
             , 'activate': list(groups_name)[2]})
             , 'user':user.c_name
@@ -252,10 +253,13 @@ def screen_shot(request):
 
 def preview_card(request, pk):
     unit = Card.objects.get(id=pk)
+    id = unit.author
+    user = User.objects.filter(id=id).values()[0]
     global bools
     bools = False
     context = {
-        'unit': unit
+        'unit': unit,
+        'user': user
     }
     test = TestCard()
     if request.method == "POST":
@@ -266,7 +270,7 @@ def preview_card(request, pk):
         bools = True
         if bools:
             return redirect('card_manage')
-    return render(request,  'final_card.html', context)
+    return render(request,  'Card/final_card.html', context)
 
 
 def preview_card1(request, pk):
