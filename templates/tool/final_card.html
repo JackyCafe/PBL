@@ -1,6 +1,5 @@
- {% load static %}
- {% include "tool/bootstrapt_3.4.html" %}
 
+{% load static %}
 <div class="container">
 <div class="row" id="chart3">
         <div class="col-md-8 col-sm-8 border border-dark rounded" >
@@ -28,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-sm-4">
-                    <div id="card-context1" ></div>
+                    <div id="card-context1"></div>
                 </div>
 
             </div>
@@ -56,6 +55,38 @@
                 </div>
             </div>
         </div>
+{#    <div class="col-md-8">#}
+{#         <div class="row">#}
+{#                <div class="col-md-4">#}
+{#                    <div id="card-context1"></div>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-md-4"></div>#}
+{#                <div class="col-md-8">#}
+{#                    <div id="card-text"></div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-md-4">#}
+{#                    <div id="card-context"> </div><br>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class ="col-md-4"></div>#}
+{#                <div class="col-md-8">#}
+{#                    <div id="card-text1"> </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        <div class="row">#}
+{#                <div class="col-md-4"></div>#}
+{#                <div class="col-md-8">#}
+{#                    <button id="btnSave" class="btn-sm btn-danger" onclick="screenshot1()">確認圖片並儲存</button>#}
+{#                    <a href={% url "card_manage" %}> <button class="btn-success">至專案資料庫</button></a>#}
+{#                </div>#}
+{#            </div>#}
+{#    </div>#}
 </div>
     <div class="row">
                 <div class="col-md-2 col-sm-2"></div>
@@ -63,7 +94,7 @@
                 <button id="btnSave" class="btn-sm btn-danger" onclick="screenshot1()">確認圖片並儲存</button>
                 </div>
         <div class="col-md-2 col-sm-2">
-            <a href={% url "card_manage"%}> <button class="btn-success">至專案資料庫</button></a>
+            <a href={% url "card_manage" %}> <button class="btn-success">至專案資料庫</button></a>
         </div>
                 </div>
 </div>
@@ -87,8 +118,8 @@
         document.getElementById("card-img").innerHTML='<img src="/{{ unit.cover.thumbnail }}" style="float:right;width:'+imgw+'px;height:'+imgh+'px;"/>';
         document.getElementById("card-context").innerHTML='<img src="{% static "images/卡片元素-04.png" %}" style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm+'px;">';
         document.getElementById("card-context1").innerHTML='<img src="{% static "images/卡片元素-05.png" %} " style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm+'px;">';
-        document.getElementById('card-text').innerHTML='<p style="font-size: 32px;">{{ unit.context }}</p>';
-        document.getElementById('card-text1').innerHTML='<p style="font-size: 32px;">{{ unit.context1 }}</p>';
+        document.getElementById('card-text').innerHTML='<p style="font-size: 10px;">{{ unit.context }}</p>';
+        document.getElementById('card-text1').innerHTML='<p style="font-size: 10px;">{{ unit.context1 }}</p>';
         document.getElementById('card-idea').innerHTML='<img src="{% static "images/卡片元素-02.png" %}" width="'+ideaw+'px;" height="'+ideah+'px;"">';
         document.getElementById('pu-img').innerHTML='<img src="{% static "images/卡片元素-07.png" %}" width="'+puimg+'px;" style="float:right;margin-top:'+conm+'px;">'
     }
