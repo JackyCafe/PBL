@@ -108,10 +108,12 @@ def cardind(request, pk):
 
 def card_manage(request):
     up_cards = TestCard.objects.all().order_by('-groups')
-    groups = Group.objects.all()
+    groups = Group.objects.get(group_user=request.session['user_id'])
+    group_id = groups.id
     return render(request, 'card_manage.html', {
         'up_cards': up_cards,
-        'groups': groups,
+        'group_id': group_id,
+        'groups': groups
 
     })
 
