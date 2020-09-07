@@ -85,13 +85,13 @@
         var ideah=hjb51/25;
         var btnm=hjb51/4;
         var puimg=hjb51/5;
-        document.getElementById("card-img").innerHTML='<img src="/{{ unit.cover.thumbnail }}" style="float:right;width:'+imgw+'px;height:'+imgh+'px;"/>';
-        document.getElementById("card-context").innerHTML='<img src="{% static "images/卡片元素-04.png" %}" style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm+'px;">';
-        document.getElementById("card-context1").innerHTML='<img src="{% static "images/卡片元素-05.png" %} " style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm+'px;">';
+        document.getElementById("card-img").innerHTML='<img src="/{{ unit.cover.thumbnail }}" class="img-fluid" style="float:right;width:'+imgw+'px;height:'+imgh+'px;"/>';
+        document.getElementById("card-context").innerHTML='<img src="{% static "images/卡片元素-04.png" %}" class="img-fluid" style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm+'px;">';
+        document.getElementById("card-context1").innerHTML='<img src="{% static "images/卡片元素-05.png" %} " class="img-fluid" style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm+'px;">';
         document.getElementById('card-text').innerHTML='<p style="font-size: 32px;">{{ unit.context }}</p>';
         document.getElementById('card-text1').innerHTML='<p style="font-size: 32px;">{{ unit.context1 }}</p>';
-        document.getElementById('card-idea').innerHTML='<img src="{% static "images/卡片元素-02.png" %}" width="'+ideaw+'px;" height="'+ideah+'px;"">';
-        document.getElementById('pu-img').innerHTML='<img src="{% static "images/卡片元素-07.png" %}" width="'+puimg+'px;" style="float:right;margin-top:'+conm+'px;">'
+        document.getElementById('card-idea').innerHTML='<img src="{% static "images/卡片元素-02.png" %}"  class="img-fluid" width="'+ideaw+'px;" height="'+ideah+'px;"">';
+        document.getElementById('pu-img').innerHTML='<img src="{% static "images/卡片元素-07.png" %}"  class="img-fluid" width="'+puimg+'px;" style="float:right;margin-top:'+conm+'px;">'
     }
     function screenshot1(){
         var wjb51=screen.width;
