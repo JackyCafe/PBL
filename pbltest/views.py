@@ -110,6 +110,7 @@ def card_manage(request):
     return render(request, 'card_manage.html', {
         'up_cards': up_cards,
         'groups': groups,
+
     })
 
 
@@ -181,7 +182,7 @@ def uploadcard(request):
         activate_name = CreateActivate.objects.get(id=list(groups_name)[2])
         UPCard.activate = activate_name
 
-        context = {'form':CardForm(initial={'author': user_id
+        context = {'form':CardForm(initial={'author': user
               ,'group':list(groups_name)[0]
             , 'activate': list(groups_name)[2]})
             , 'user':user.c_name

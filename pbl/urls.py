@@ -36,7 +36,7 @@ urlpatterns = [
     path('checkcard/', card_list_view, name='check_card'),
     path('createcard/<int:pk>', post_card, name='createcard'),
     path('changecard/<int:pk>', change_card, name='change_card'),
-    path('card_manage', card_manage, name='card_manage'),
+    path('card_manage/', card_manage, name='card_manage'),
     path('hello', PDFTemplateView.as_view(template_name='hello.html'), name='pdf'),
     path('screen_shot', screen_shot, name='screen_shot'),
     path('c_card/', check_card),
