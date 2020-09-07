@@ -17,12 +17,12 @@
     <div class="container">
     <div class="row">
         <script>
-　           document.write('<div class="card w-75 bg-dark text-white col-md-6">');
+　           document.write('<div class="card bg-dark text-white col-md-6">');
                 document.write('<h5 class="card-title text-center"><a href={% url 'check_card' %} > {{ groups }}</a></h5>');
 
             {% for up_card in up_cards %}
                 {% if up_card.groups.id == group_id %}
-                        document.write('<div class="card w-75 bg-dark text-white"style="margin-top: 1em;">');
+                        document.write('<div class="card bg-dark text-white"style="margin-top: 1em;">');
                     {% if up_card.base_card_id != null %}
                         document.write('<a href={% url 'change_card' pk=up_card.base_card_id %} class="text-center"> <img id="source" src="{{ up_card.base_img }}" width="300px" height="300px"></a>');
                     {% elif up_card.base_card1_id != null%}
