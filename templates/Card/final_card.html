@@ -1,7 +1,9 @@
- {% load static %}
+  {% load static %}
  {% include "tool/bootstrapt_3.4.html" %}
 
+
 <div class="container">
+    <div class="row1"></div>
 <div class="row" id="chart3">
         <div class="col-md-8 col-sm-8 border border-dark rounded" >
             <div class="row">
@@ -60,15 +62,14 @@
     <div class="row">
                 <div class="col-md-2 col-sm-2"></div>
                 <div class="col-md-2 col-sm-2">
-                <button id="btnSave" class="btn-sm btn-danger" onclick="screenshot1()">確認圖片並儲存</button>
+                <button id="btnSave" class="btn-sm btn-danger" onclick="screenshot1()">儲存</button>
                 </div>
         <div class="col-md-2 col-sm-2">
-            <a href={% url "card_manage"%}> <button class="btn-success">至專案資料庫</button></a>
+            <a href={% url "card_manage"%}> <button class="btn-success">專案資料庫</button></a>
         </div>
                 </div>
 </div>
-
-</body>
+ </body>
 <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -96,10 +97,10 @@
         var wjb51=screen.width;
         var hjb51=screen.height;
         html2canvas(document.getElementById('chart3'),{
-            x:100,
-            y:50,
+            x:300,
+            y:0,
             width:wjb51,
-            height:hjb51+300,
+            height:hjb51+400,
         }).then(canvas=> {
               var result1 = canvas.toDataURL('image/jpeg');
              $.ajax({
