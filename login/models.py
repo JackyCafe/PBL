@@ -28,7 +28,7 @@ class User(models.Model):
 
 class Group(models.Model):
     group = models.CharField(max_length=128, null=True, blank=True)
-    group_user = models.ManyToManyField(User, blank=True, related_name='user_user')
+    group_user = models.ManyToManyField(User, blank=True,related_name='user_user')
     activate = models.ForeignKey('CreateActivate', on_delete=models.CASCADE, blank=True)
 
     def __str__(self):

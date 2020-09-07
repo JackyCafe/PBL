@@ -13,31 +13,28 @@
         <!--<div class="upload_file d-block w-100" style="height: 20em;background-image:url('https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg')"-->
 		<label for="card_name">輸入相片名稱</label>
         {{ form.title }}
-        <label for="card_author">作者</label>
-        {{ form.author }}
         {{ form.cover }}
+
         <label for="class_material">教材</label>
         <select id="class_material" name="class_material" class="form-control">
                                 <option value="1">直式</option>
                                 <option value="2">橫式</option>
         </select>
-        <label for="activate_id">活動</label>
-{#    {{ activate_a }}#}
-{#    <select id="activate_id" name="activate_id" class="form-control">#}
-{#        {% for actitvate_a1 in activate_a %}#}
-{#            <option value="{{ actitvate_a1.id }}">123</option>#}
-{#        {% endfor %}#}
-{#    </select>#}
-    {{ form.activate }}
+
+        <label for="card_author">作者</label>
+        {{ user }}
+        {{ form.author }}
+
+        <p></p>
+        {{ activate_name }} {{ form.activate }}
+        <p></p>
         <label for="group_id">群組</label>
-{#    {{ group_a }}#}
-{#    <select id="group_id" name="group_id" class="form-control">#}
-{#        {% for group_a1 in group_a %}#}
-{#             <option value="{{ group_a1.id }}">123</option>#}
-{#        {% endfor %}#}
-{#    </select>#}
-        {{ form.group }}
-        <!--</div>-->
+        {{groups_name }}{{ form.group }}
+{#        <input  id="group" value="{{ group }}">#}
+{#        <input id="author"  value="{{ author }}">#}
+{#        <input id="activate"  value="{{ activate }}">#}
+
+
 	</div>
 	<div class="text-center">
                 <input type="submit" class="btn btn-primary btn-lg" value="上傳檔案">

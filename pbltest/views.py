@@ -13,12 +13,18 @@ from .forms import CardForm, CreateCardForm, RowCreateCardForm
 from .imglib import Picture_part
 from .models import UPCard, Card, TestCard, RowCard
 
-
+#Todo
 def post_card(request, pk):
     post = UPCard.objects.all()
     card = UPCard.objects.get(id=pk)
-    author = Group.objects.filter(group_user=request.session['user_id'])
-    group = Group.objects.all();
+    user = Group.objects.get(group_user=request.session['user_id'])
+    author = request.session['user_id']
+    group = user.group
+    activate = user.activate
+    Card.group = group
+    Card.activate = activate
+    Card.author = user
+     # groups = Group.objects.all();
     if request.method == "POST":
         card_form = CreateCardForm(request.POST)
         if card_form.is_valid():
@@ -28,11 +34,12 @@ def post_card(request, pk):
     else:
         card_form = CreateCardForm()
     context = {
-        'form': card_form,
+        'form': CreateCardForm(initial={'author': author
+              ,'group':group
+            , 'activate': activate}),
         'pk': pk,
         'card': card,
-        'author': author,
-        'group': group,
+         # 'groups': groups,
     }
     return render(request, "create_card.html", context)
 
@@ -114,7 +121,7 @@ def change_card(request, pk):
         'unit': unit,
     }
 
-    print('123');
+
     if card_form.is_valid():
         card_form.save()
         return redirect('index')
@@ -142,14 +149,18 @@ def uploadcard(request):
     if request.method == 'POST':
         form = CardForm(request.POST, request.FILES)
         if form.is_valid():
-            cards = form.save() #UPCard 的實體
+            cards = form.save(commit=False) #UPCard 的實體
+            print(form)
             file = cards.cover.file.name
             filename = os.path.basename(file)
             #pic = Picture_part(filename)
             pic = Picture_part('media/card/covers/'+filename)
-
+            cd = form.cleaned_data
             if cards.class_material == '1': # 直式
                 cards.thumbnail = 'media/card/vertical/'+filename
+                cards.author_id = cd['author']
+                cards.activate_id = cd['activate']
+                cards.group_id = cd['group']
                 cards.save()
                 img = pic.vertical()
                 cv2.imencode('.JPG',img)[1].tofile(cards.thumbnail)
@@ -162,7 +173,24 @@ def uploadcard(request):
             return redirect(reverse('check_card'))
     else:
         form = CardForm()
-    return render(request, 'cardlist.html', {'form': form})
+        user_id = request.session['user_id']
+        user = User.objects.get(id=user_id)
+        UPCard.author = user_id
+        groups_name =  user.user_user.all().values_list('id','group','activate_id')[0]
+        UPCard.group = list(groups_name)[1]
+        activate_name = CreateActivate.objects.get(id=list(groups_name)[2])
+        UPCard.activate = activate_name
+
+        context = {'form':CardForm(initial={'author': user_id
+              ,'group':list(groups_name)[0]
+            , 'activate': list(groups_name)[2]})
+            , 'user':user.c_name
+            , 'activate_name':activate_name
+            ,'groups_name': list(groups_name)[1]
+            , 'activate_name': activate_name
+
+                   }
+    return render(request, 'cardlist.html', context)
 
 
 def card_list(request):
@@ -180,8 +208,7 @@ def card_list(request):
 
 
 def check_card(request):
-    print('hello')
-    print(request.user.username)
+
     up_cards = Card.objects.all()
     carda = UPCard.objects.all()
     context = {
