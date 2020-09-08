@@ -24,10 +24,10 @@
                         document.write('<div class="card  bg-dark text-white"style="margin-top: 1em;">');
                     {% if up_card.base_card_id != null %}
                         document.write('<a href={% url 'change_card' pk=up_card.base_card_id %} class="text-center"> <img id="source" src="{{ up_card.base_img }}" width="300px" height="300px"></a>');
-                        document.write('<button class="btn" style="color: white"><a href="{{ up_card.base_img }}" download="myimage"> 下載</a></button>');
+                        document.write('<button class="btn" style="color: white"><a href="{{ up_card.base_img }}" download={{ up_card.base_card }}> 下載</a></button>');
                     {% elif up_card.base_card1_id != null%}
                         document.write('<a href={% url 'change_card1' pk=up_card.base_card1_id %} class="text-center"> <img id="source" src="{{ up_card.base_img }}" width="300px" height="300px"></a>');
-                        document.write('<button class="btn" style="color: white"><a href="{{ up_card.base_img }}" download="myimage"> 下載</a></button>');
+                        document.write('<button class="btn" style="color: white"><a href="{{ up_card.base_img }}" download="{{ up_card.base_card }}"> 下載</a></button>');
                     {% endif %}
                         document.write('</div>');
                 {% endif %}
