@@ -1,0 +1,129 @@
+ {% load static %}
+ {% include "tool/bootstrapt_3.4.html" %}
+
+<div class="container">
+<div class="row" id="chart3" style="margin-top: 50px">
+        <div class="col-md-8 col-sm-8 border border-dark rounded" >
+            <div class="row">
+                 <div class="col-md-8 col-sm-8"></div>
+                <div class="col-md-4 col-sm-4">
+                    <div id="card-idea"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8"></div>
+                <div class="col-md-4 col-sm-4">
+                 <p style="font-size:20px;">作者:{{ user.c_name}}</p>
+                    <p style="font-size:20px;">{{ unit.group}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2"></div>
+                <div class="col-md-2 col-sm-2">
+                    <h1 style="text-orientation: upright;writing-mode: vertical-lr; ">{{ unit.title }}</h1><br>
+                 </div>
+                <div class="col-md-8 col-sm-8">
+                    <div id="card-img"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div id="card-context1" ></div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4"></div>
+                <div class="col-md-8 col-sm-8">
+                    <div id="card-text"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div id="card-context"> </div><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class ="col-md-4 col-sm-4"></div>
+                <div class="col-md-8 col-sm-8">
+                    <div id="card-text1"> </div>
+                </div>
+            </div>
+        <div class="row">
+                <div class="col-md-4 col-sm-4"></div>
+                <div class="col-md-8 col-sm-8">
+                    <div id="pu-img"> </div>
+                </div>
+            </div>
+        </div>
+</div>
+    <div class="row">
+                <div class="col-md-2 col-sm-2"></div>
+                <div class="col-md-2 col-sm-2">
+                <button id="btnSave" class="btn btn-primary" onclick="screenshot1()">儲存</button>
+                </div>
+        <div class="col-md-2 col-sm-2">
+            <a href={% url "card_manage"%}>
+                <button class="btn btn-primary">小組卡片庫</button></a>
+        </div>
+                </div>
+</div>
+
+</body>
+<script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+    window.onload=function(){
+        var wjb51=screen.width;
+        var hjb51=screen.height;
+        var imgw=hjb51/2;
+        var imgh=hjb51/3;
+        var conm=hjb51/10;
+        var conw=hjb51/9;
+        var conh=hjb51/27;
+        var ideaw=hjb51/8;
+        var ideah=hjb51/25;
+        var btnm=hjb51/4;
+        var puimg=hjb51/5;
+        if (wjb51 >768) {
+        document.getElementById("card-img").innerHTML='<img src="/{{ unit.cover.thumbnail }}" class="img-fluid" style="float:right;width:'+imgw+'px;height:'+imgh+'px;"/>';
+        document.getElementById("card-context").innerHTML='<img src="{% static "images/卡片元素-04.png" %}" class="img-fluid" style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm+'px;">';
+        document.getElementById("card-context1").innerHTML='<img src="{% static "images/卡片元素-05.png" %} " class="img-fluid" style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm+'px;">';
+        document.getElementById('card-text').innerHTML='<p style="font-size : 32px;font-family:serif;">{{ unit.context }}</p>';
+        document.getElementById('card-text1').innerHTML='<p style="font-size: 32px;font-family:serif;">{{ unit.context1 }}</p>';
+        document.getElementById('card-idea').innerHTML='<img src="{% static "images/卡片元素-02.png" %}"  class="img-fluid" width="'+ideaw+'px;" height="'+ideah+'px;"">';
+        document.getElementById('pu-img').innerHTML='<img src="{% static "images/卡片元素-07.png" %}"  class="img-fluid" width="'+puimg+'px;" style="float:right;">'
+        } else {
+             document.getElementById("card-img").innerHTML='<img src="/{{ unit.cover.thumbnail }}" class="img-fluid" style="float:right;width:'+imgw+'px;height:'+imgh+'px;"/>';
+            document.getElementById("card-context").innerHTML='<img src="{% static "images/卡片元素-04.png" %}" class="img-fluid" style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm/2+'px;">';
+            document.getElementById("card-context1").innerHTML='<img src="{% static "images/卡片元素-05.png" %} " class="img-fluid" style="float:right;height:'+conh+'px;width:'+conw+'px;margin-top:'+conm/2+'px;">';
+            document.getElementById('card-text').innerHTML='<p style="font-size: 16px; font-family:serif;">{{ unit.context }}</p>';
+            document.getElementById('card-text1').innerHTML='<p style="font-size: 16px;font-family:serif;">{{ unit.context1 }}</p>';
+            document.getElementById('card-idea').innerHTML='<img src="{% static "images/卡片元素-02.png" %}"  class="img-fluid" width="'+ideaw+'px;" height="'+ideah+'px;"">';
+            document.getElementById('pu-img').innerHTML='<img src="{% static "images/卡片元素-07.png" %}"  class="img-fluid" width="'+puimg+'px;" style="float:right;">'
+        }
+
+
+
+    }
+    function screenshot1(){
+
+
+        html2canvas(document.getElementById('chart3'),{
+             x:-100,
+            y:50,
+            windowWidth: document.getElementById('chart3').clientWidth,
+            windowHeight: (document.getElementById('chart3').clientHeight-50),
+        }).then(canvas=> {
+              var result1 = canvas.toDataURL('image/jpeg');
+             $.ajax({
+                type: 'POST',
+                url: '/preview_card/'+{{unit.id}},
+                data: { 'result1': result1},
+            });
+        });
+            console.log(document.getElementById('chart3').clientHeight-50)
+
+    }
+
+</script>

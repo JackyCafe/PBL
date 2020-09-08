@@ -1,0 +1,29 @@
+<script>
+    function redirectPage() {
+        var wjb51=screen.width;
+        var hjb51=screen.height;
+        return (wjb51+"*"+hjb51);
+    }
+    document.getElementById("demo").innerHTML = redirectPage();
+</script>
+{% block content %}
+    <div class="container">
+			<div class="row">
+                {% if request.session.user_identify == 'teacher' %}
+
+                    <div class="col-md-3"><a href="/createclass"><button class="btn" onclick="newclass()"><h4>新增教室</h4></button></a></div>
+                    <div class="col-md-3"><a href={% url 'check_card' %}> <button class="btn"><h4>卡片資料庫</h4></button></a></div>
+			    	<div class="col-md-3"><a href={% url 'check_group' %}><button class="btn"><h4>群組管理</h4></button></a></div>
+
+
+
+{#                            <td ><h4><a href={% url 'card' %}> 進入新教室</a></h4></td>#}
+
+
+                             {% endif %}
+
+
+
+			</div>
+		</div>
+{% endblock %}

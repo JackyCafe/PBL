@@ -1,0 +1,37 @@
+{% block Cardtitle %}
+    <title>卡片管理介面</title>
+{% endblock %}
+{%  load static %}
+<script  src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <img class="d-block" style="width: 100%" src="{% static "images/background.jpg"  %}">
+<table class="table table-bordered">
+    <thead >
+     <th class="text-center"scope="col"><a href={% url 'upload_card' %} ><button type="button" class="btn">創卡</button></a> </th>
+      <th class="text-center" scope="col"><button type="button" class="btn">小組卡片資料庫</button> </th>
+    </thead>
+</table>
+{% block cardcontext %}
+    <div class="container">
+    <div class="row">
+        <script>
+　           document.write('<div class="card  bg-dark text-white col-md-6">');
+                document.write('<h5 class="card-title text-center"> {{ groups }}</h5>');
+            {% for up_card in up_cards %}
+                {% if up_card.groups.id == group_id %}
+                        document.write('<div class="card  bg-dark text-white"style="margin-top: 1em;">');
+                    {% if up_card.base_card_id != null %}
+                        document.write('<a href={% url 'change_card' pk=up_card.base_card_id %} class="text-center"> <img id="source" src="{{ up_card.base_img }}" style= "width:420px; height:490px"></a>');
+                        document.write('<button class="btn" style="color: white"><a href="{{ up_card.base_img }}" download="{{ up_card.base_card }}"> 下載</a></button>');
+                    {% elif up_card.base_card1_id != null%}
+                        document.write('<a href={% url 'change_card1' pk=up_card.base_card1_id %} class="text-center"> <img id="source" src="{{ up_card.base_img }}" width="420px" height="490px"></a>');
+                        document.write('<button class="btn" style="color: white"><a href="{{ up_card.base_img }}" download="{{ up_card.base_card }}"> 下載</a></button>');
+                    {% endif %}
+                        document.write('</div>');
+                {% endif %}
+            {% endfor %}
+
+                        document.write('</div>');
+</script>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+{% block  content %}
+     <img class="img-fluid" alt="Responsive image" src="{% static 'images/index.jpg' %}" style="width: 100%; height :auto" >
+
+     <div class="container">
+			<div class="row">
+
+				<div class="col-md-12">
+    {% if request.session.user_identify == 'teacher' %}
+           <div class="panel-primary">
+                        <div class="panel-heading">
+        <a href={% url 'create_activate' %}>創建班級</a>
+                        </div>
+           </div>
+
+    {% endif %}
+    <div>
+        {% for activate_a1 in activate_a %}
+            {% if group_a %}
+
+                {% for group_a1 in group_a %}
+                    {% if group_a1.activate == activate_a1 or request.session.user_identify == 'teacher'%}
+                    {% cycle "<div class='row'> <div class='col-md-4'>" "<div class='col-md-4'>" "<div class='col-md-4'>"%}
+                         <div class="card" style="width: auto;">
+                                    <div class="card-body">
+                           <div class="card-text"> <a href={% url 'view_group' pk=activate_a1.id %}><h4>{{ activate_a1.activate_name}}</h4></a></div>
+                                    </div></div>
+                        </div>
+                        {% cycle "" "" "</div>" %}
+
+                    {% endif %}
+                {% endfor %}
+            {% else%}
+                 <a href={% url 'create_group'  pk=class_id%}><h4>{{ activate_a1.activate_name}}</h4></a>
+
+
+            {% endif %}
+     {% endfor %}
+
+                </div>
+            </div>
+    </div>
+{% endblock %}
